@@ -1,0 +1,20 @@
+{
+  "config.effect_countdown.category.main": "Effect Countdown",
+  "config.effect_countdown.category.main.tooltip": "Effect Countdown's Config",
+  "config.effect_countdown.group.logic": "Effect Logic",
+  "config.effect_countdown.group.warning": "Effect Expiration Warning",
+  "config.effect_countdown.group.warning_effects": "Effects With Warnings",
+  "config.effect_countdown.group.logic.desc": "Subsets of effects to ignore",
+  "config.effect_countdown.group.warning.desc": "The countdown tick",
+  "config.effect_countdown.group.warning_effects.desc": "The effects you should be warned about",
+  "config.effect_countdown.option.ignore_ambient": "Ignore Ambient Effects",
+  "config.effect_countdown.option.ignore_hidden": "Ignore Hidden Effects",
+  "config.effect_countdown.option.warning_start": "Warning Start (Ticks)",
+  "config.effect_countdown.option.warning_interval": "Warning Interval (Ticks)",
+  "config.effect_countdown.option.warning_sound": "Warning Sound",
+  "config.effect_countdown.option.ignore_ambient.desc": "Whether ambient effects should be ignored (e.g. from beacons, conduits)",
+  "config.effect_countdown.option.ignore_hidden.desc": "Whether hidden effects should be ignored",
+  "config.effect_countdown.option.warning_start.desc": "When the countdown should start in ticks (e.g. 10 seconds before = 200)",
+  "config.effect_countdown.option.warning_interval.desc": "How often the tick sound should play during the countdown (e.g. once per second = 20)",
+  "config.effect_countdown.option.warning_sound.desc": "The Sound ID to play as the tick sound (e.g. block.note_block.chime)"
+}

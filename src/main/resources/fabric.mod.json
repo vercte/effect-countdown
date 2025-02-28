@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "effectcountdown",
+  "version": "${version}",
+  "name": "Effect Countdown",
+  "description": "plays a sound to warn you when status effects are running out",
+  "authors": [
+    {
+      "name": "Vercte",
+      "contact": {
+        "homepage": "https://vercte.net"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/effect-countdown",
+    "sources": "https://github.com/vercte/effect-countdown",
+    "issues": "https://github.com/vercte/effect-countdown/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/effectcountdown/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.vercte.effectcountdown.client.EffectCountdownClient"
+    ],
+    "modmenu": [
+      "net.vercte.effectcountdown.client.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "effectcountdown.mixins.json",
+    {
+      "config": "effectcountdown.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "yet_another_config_lib_v3": ">=3.6.1+1.20.1"
+  }
+}
