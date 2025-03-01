@@ -81,7 +81,7 @@ public class ModConfig {
         HANDLER.load();
     }
 
-    public @NotNull ConfigCategory getCategory(ModConfig defaults) {
+    public @NotNull ConfigCategory getCategory(ModConfig defaults, ModConfig config) {
         ConfigCategory.Builder category = ConfigCategory.createBuilder();
         category.name(Component.translatable("config.effect_countdown.category.main"));
         category.tooltip(Component.translatable("config.effect_countdown.category.main.tooltip"));
@@ -93,14 +93,14 @@ public class ModConfig {
                         .name(Component.translatable("config.effect_countdown.option.ignore_ambient"))
                         .description(
                                 OptionDescription.of(Component.translatable("config.effect_countdown.option.ignore_ambient.desc"))
-                        ).binding(defaults.ignoreAmbient, () -> this.ignoreAmbient, newVal -> this.ignoreAmbient = newVal)
+                        ).binding(defaults.ignoreAmbient, () -> config.ignoreAmbient, newVal -> config.ignoreAmbient = newVal)
                         .controller(TickBoxControllerBuilder::create)
                         .build()
                 ).option(Option.<Boolean>createBuilder()
                         .name(Component.translatable("config.effect_countdown.option.ignore_hidden"))
                         .description(
                                 OptionDescription.of(Component.translatable("config.effect_countdown.option.ignore_hidden.desc"))
-                        ).binding(defaults.ignoreHidden, () -> this.ignoreHidden, newVal -> this.ignoreHidden = newVal)
+                        ).binding(defaults.ignoreHidden, () -> config.ignoreHidden, newVal -> config.ignoreHidden = newVal)
                         .controller(TickBoxControllerBuilder::create)
                         .build()
                 )
@@ -114,21 +114,21 @@ public class ModConfig {
                         .name(Component.translatable("config.effect_countdown.option.warning_start"))
                         .description(
                                 OptionDescription.of(Component.translatable("config.effect_countdown.option.warning_start.desc"))
-                        ).binding(defaults.warningStart, () -> this.warningStart, newVal -> this.warningStart = newVal)
+                        ).binding(defaults.warningStart, () -> config.warningStart, newVal -> config.warningStart = newVal)
                         .controller(IntegerFieldControllerBuilder::create)
                         .build()
                 ).option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.effect_countdown.option.warning_interval"))
                         .description(
                                 OptionDescription.of(Component.translatable("config.effect_countdown.option.warning_interval.desc"))
-                        ).binding(defaults.warningInterval, () -> this.warningInterval, newVal -> this.warningInterval = newVal)
+                        ).binding(defaults.warningInterval, () -> config.warningInterval, newVal -> config.warningInterval = newVal)
                         .controller(IntegerFieldControllerBuilder::create)
                         .build()
                 ).option(Option.<String>createBuilder()
                         .name(Component.translatable("config.effect_countdown.option.warning_sound"))
                         .description(
                                 OptionDescription.of(Component.translatable("config.effect_countdown.option.warning_sound.desc"))
-                        ).binding(defaults.warningSound, () -> this.warningSound, newVal -> this.warningSound = newVal)
+                        ).binding(defaults.warningSound, () -> config.warningSound, newVal -> config.warningSound = newVal)
                         .controller(StringControllerBuilder::create)
                         .build()
                 )
@@ -137,7 +137,7 @@ public class ModConfig {
                 .name(Component.translatable("config.effect_countdown.group.warning_effects"))
                 .description(
                         OptionDescription.of(Component.translatable("config.effect_countdown.group.warning_effects.desc"))
-                ).binding(defaults.effectList, () -> this.effectList, newVal -> this.effectList = newVal)
+                ).binding(defaults.effectList, () -> config.effectList, newVal -> config.effectList = newVal)
                 .controller(StringControllerBuilder::create)
                 .initial("minecraft:effect_id")
                 .build()
@@ -150,7 +150,7 @@ public class ModConfig {
         return YetAnotherConfigLib.create(HANDLER, (defaults, config, builder) -> builder
                 .title(Component.empty())
                 .save(() -> HANDLER.save())
-                .category(getCategory(defaults))
+                .category(getCategory(defaults, config))
         );
     }
 }

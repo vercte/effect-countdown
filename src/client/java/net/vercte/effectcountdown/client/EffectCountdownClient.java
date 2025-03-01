@@ -23,7 +23,7 @@ public class EffectCountdownClient implements ClientModInitializer {
         for(MobEffectInstance effect: mobEffects) {
             if(isEffectImportant(effect) &&
                 effect.endsWithin(CONFIG.warningStart) &&
-                effect.getDuration() % CONFIG.warningStart == 0) return true;
+                effect.getDuration() % CONFIG.warningInterval == 0) return true;
         }
         return false;
     }
@@ -50,6 +50,8 @@ public class EffectCountdownClient implements ClientModInitializer {
         ModConfig.load();
 
         ClientTickEvents.END_CLIENT_TICK.register((Minecraft minecraft) -> {
+            if(minecraft.isPaused()) return;
+
             LocalPlayer player = minecraft.player;
             if(player == null) return;
 
