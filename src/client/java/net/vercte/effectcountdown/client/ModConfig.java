@@ -11,6 +11,7 @@ import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ModConfig {
     public static ModConfig INSTANCE = new ModConfig();
@@ -71,7 +73,8 @@ public class ModConfig {
 
     public @Nullable SoundEvent getSound() {
         ResourceLocation soundLocation = ResourceLocation.parse(this.warningSound);
-        return BuiltInRegistries.SOUND_EVENT.get(soundLocation);
+        Optional<Holder.Reference<SoundEvent>> soundEvent = BuiltInRegistries.SOUND_EVENT.get(soundLocation);
+        return soundEvent.map(Holder.Reference::value).orElse(null);
     }
 
     public static ModConfig getInstance() {
