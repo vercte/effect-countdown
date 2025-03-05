@@ -5,13 +5,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.Collection;
 
 public class EffectCountdownClient implements ClientModInitializer {
-    private final ModConfig CONFIG = ModConfig.getInstance();
+    private static ModConfig CONFIG = null;
+
+    static void newInstance() { CONFIG = ModConfig.getInstance(); }
 
     private boolean isEffectImportant(MobEffectInstance effectInstance) {
         return !(CONFIG.ignoreAmbient && effectInstance.isAmbient()) &&
@@ -48,6 +49,7 @@ public class EffectCountdownClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ModConfig.load();
+        newInstance();
 
         ClientTickEvents.END_CLIENT_TICK.register((Minecraft minecraft) -> {
             if(minecraft.isPaused()) return;

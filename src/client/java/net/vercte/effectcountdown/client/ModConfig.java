@@ -75,7 +75,7 @@ public class ModConfig {
     }
 
     public static ModConfig getInstance() {
-        return INSTANCE;
+        return HANDLER.instance();
     }
     public static void load() {
         HANDLER.load();
@@ -149,7 +149,10 @@ public class ModConfig {
     public @NotNull YetAnotherConfigLib getYACLInstance() {
         return YetAnotherConfigLib.create(HANDLER, (defaults, config, builder) -> builder
                 .title(Component.empty())
-                .save(() -> HANDLER.save())
+                .save(() -> {
+                    HANDLER.save();
+                    EffectCountdownClient.newInstance();
+                })
                 .category(getCategory(defaults, config))
         );
     }
