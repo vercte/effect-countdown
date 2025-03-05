@@ -26,7 +26,7 @@ public class ModConfig {
     public static ModConfig INSTANCE = new ModConfig();
 
     public static ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
-            .id(new ResourceLocation("effect_countdown", "config"))
+            .id(ResourceLocation.fromNamespaceAndPath("effect_countdown", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("effect_countdown.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
@@ -59,10 +59,10 @@ public class ModConfig {
     );
 
     public boolean effectMatches(MobEffectInstance instance) {
-        ResourceLocation location = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect());
+        ResourceLocation location = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect().value());
         if(location != null) {
             for(String listEffectID: effectList) {
-                ResourceLocation listEffectLocation = new ResourceLocation(listEffectID);
+                ResourceLocation listEffectLocation = ResourceLocation.parse(listEffectID);
                 if(listEffectLocation.equals(location)) return true;
             }
         }
@@ -70,7 +70,7 @@ public class ModConfig {
     }
 
     public @Nullable SoundEvent getSound() {
-        ResourceLocation soundLocation = new ResourceLocation(this.warningSound);
+        ResourceLocation soundLocation = ResourceLocation.parse(this.warningSound);
         return BuiltInRegistries.SOUND_EVENT.get(soundLocation);
     }
 
